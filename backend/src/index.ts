@@ -6,6 +6,7 @@ import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { ExpressAdapter } from '@bull-board/express';
 import { emailQueue } from './queues/emailQueue';
 import emailRoutes from './routes/email';
+import authRoutes from './routes/auth';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ createBullBoard({
   serverAdapter: serverAdapter,
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/emails', emailRoutes);
 app.use('/admin/queues', serverAdapter.getRouter());
 

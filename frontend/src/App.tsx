@@ -59,25 +59,29 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   return children;
 };
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route 
-              path="/" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-          </Routes>
-        </div>
-      </Router>
-    </AuthProvider>
+    <GoogleOAuthProvider clientId="968759473735-m819ophb7k1406e65m9h66hc27bhshf6.apps.googleusercontent.com">
+      <AuthProvider>
+        <Router>
+          <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route 
+                path="/" 
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+            </Routes>
+          </div>
+        </Router>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 
